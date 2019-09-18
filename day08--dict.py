@@ -41,6 +41,7 @@ print('name' in employee)
 print('class' in employee)
 '''
 #遍历字典
+'''
 employee = {"name":"张三", "age":29, "class":'B5'}
 #方法一：   遍历字典中的key
 for key in employee:
@@ -51,5 +52,33 @@ for key in employee:
 for key,value in employee.items():      #dict.items()   返回字典中的每一个键值对
     print(key, ":", value)
 
-
+'''
 #字典更新与删除操作
+'''
+    字典的增删改:
+        dict['key'] = new_value     #更新kv
+        dict.update(key1 = value1,key2 = value2)        #更新或新增多个kv   --原则：有责更新，无责新增
+        dict['new_key'] = new_value     #新增kv   --原则：有责更新，无责新增
+        dict.pop['key']         #删除指定的kv
+        dict.popitem()          #删除最后一个kv
+        dict.clear()            #情况字典中的所有kv
+'''
+employee = {"name":"张三", "age":29, "clas":'B5'}
+#更新
+employee['clas'] = 'A6'
+print(employee)
+#更新多个kv
+employee.update(age = 30,clas = 'A2')
+print(employee)
+
+#字典的新增，与更新操作相同，原则：有责更新，无责新增
+employee['ddos'] = 'test'
+print(employee)
+
+#删除
+employee.pop('ddos')    #删除指定的kv
+print(employee)
+employee.popitem()      #删除最后一个kv
+print(employee)
+employee.clear()        #清空字典
+print(employee)
