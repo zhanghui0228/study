@@ -157,3 +157,14 @@ list1 = [i for i in lst if i % 2 != 0]
 print(list1)
 list2 = [i + 5 for i in lst]
 print(list2)
+
+cont = [1, 2]
+cont.append([3, 4])
+print(cont)
+
+text = "hewoool"
+print(text.find("w", 0,3))
+s2 = "i, love"
+print(s2.split(","))
+
+print(type({1, 2, 3}))
