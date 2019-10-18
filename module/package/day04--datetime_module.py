@@ -61,17 +61,20 @@ print("{year}-{month}-{day}".format(year=datetime.now().year,month=datetime.now(
     dadetime模块转换参数列表：
     %A      星期的名称
     %B      月份名
-    %:m     用数字表示的月份
+    %m     用数字表示的月份
     %d      用数字表示月份中的一天
     %Y      四位的年份
-    %y      两位的月份
+    %y      两位的年份
     %H      24小时制的小时数
     %I      12小时制的小时数
     %p      am或pm
     %M      分钟数
     %S      秒数
 '''
-from datetime import datetime, date, time
+'''
+from datetime import datetime, date, time, timedelta
+
+
 #自定义日期和时间
 d = datetime(2019, 10, 14, 17, 40)
 print(d)
@@ -81,6 +84,111 @@ t = time(18, 0)
 print(t)
 print("-----------------------------------")
 #日期、时间与字符串之间的相互转换
+#字符串转换datetime对象
 ds = '2019-10-17 11:38:30'
 ds_t = datetime.strptime(ds, '%Y-%m-%d %H:%M:%S')
 print(ds_t)
+print(ds_t.date())
+
+#datetime转换字符串
+n = datetime.now()
+n_str = n.strftime('%Y-%m-%d %H:%M:%S')
+n_year = n.strftime('%Y')       #只获取当前年份
+print(n_year)
+print(n_str)
+
+#datetime之间的加减操作
+
+#时间的加法
+now = datetime.today()
+print(now)
+next_time = now + timedelta(days=2, hours=12)
+print(next_time)
+
+#时间的减法
+date1 = datetime(2019, 10, 18)
+date2 = datetime(2019, 11, 18)
+result = date2 - date1
+print(result)
+'''
+
+#编程练习一
+'''
+任务
+    1、date_time变量接收自定义日期时间为2019-10-10 8:10
+    2、使用time模块的sleep函数停顿2秒
+    3、使用date_变量接收自定义日期2019-11-11
+    4、使用time_变量接收自定义时间11:11
+'''
+import datetime, time
+# 自定义日期时间为2019-10-10 8:10
+date1 = '2019-10-10 8:10:0'
+# 打印自定义的日期时间对象
+d = datetime.datetime.strptime(date1, '%Y-%m-%d %H:%M:%S')
+print(d)
+# 使用time模块的sleep函数停顿2秒
+time.sleep(2)
+# 自定义日期2019-11-11
+date2 = '2019-11-11'
+# 打印自定义的日期对象
+d2 = datetime.datetime.strptime(date2, '%Y-%m-%d')
+print(d2)
+# 自定义时间11:11
+ti = '23:33:00'
+# 打印自定义的时间对象
+t = datetime.datetime.strptime(ti, '%H:%M:%S')
+print(t)
+
+#编程练习二
+'''
+任务
+    1、定义一个str_字符串为2019-09-10 8:10:56
+    2、将str_转换为日期函数2019-09-10 8:10:56，使用str_date变量接收
+    3、定义now_变量接收当前的日期时间
+    4、将当前日期时间格式化为——四位的年份/月/日 时:分:秒，使用date_str接收
+'''
+from datetime import datetime
+# 定义一个str_字符串为2019-09-10 8:10:56
+str_ = '2019-09-10 8:10:56'
+# 将str_转换为日期函数2019-09-10 8:10:56
+str_date = datetime.strptime(str_, '%Y-%m-%d %H:%M:%S')
+# 定义now_变量接收当前的日期时间
+now_ = datetime.now()
+# 将当前日期时间格式化为——四位的年份/月/日 时:分:秒
+date_str = now_.strftime('%Y/%m/%d %H:%M:%S')
+print(str_date)
+print(date_str)
+
+#编程练习三
+'''
+任务
+    1、定义now_变量接收当前日期时间
+    2、使用now_before接收距当前日期时间3天36小时12分钟之前的日期时间
+    3、使用now_after接收计算10天之后的日期时间
+'''
+from datetime import datetime, timedelta
+# 定义now_变量接收当前日期时间
+now_= datetime.now()
+# 计算距当前日期时间3天36小时12分钟之前的日期时间
+now_before= now_ - timedelta(days=3, hours=36, minutes=12)
+# 计算10天之后的日期时间
+now_after= now_ + timedelta(days=10)
+print(now_before)
+print(now_after)
+
+
+
+###################################
+#python安装第三方模块
+'''
+    查看第三方模块的网站：
+        www.pypi.org
+    安装方法：
+        方法一：
+            pip install module_name     #直接安装
+        方法二：
+            python setup.py install     #源码安装       解压后的
+            pip install modele_tar      #直接指定下载的压缩模块包进行安装
+    卸载方法：
+        pip uninstall module_name
+'''
