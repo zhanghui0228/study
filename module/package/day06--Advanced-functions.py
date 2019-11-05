@@ -160,9 +160,61 @@ def use_py_sum(list):
     '''使用python内置的函数进行求和'''
     return sum(list)
 
+def f(m, n):
+    '''
+    求两个数的和
+    :param m:
+    :param n:
+    :return:
+    '''
+    return m + n
+from functools import reduce
+
+def get_sum_reduce(list):
+    '''
+    使用reduce进行求和
+    :param list:
+    :return:
+    '''
+    return reduce(f, list)
+
+def get_sum_lambda_reduce(list):
+    '''
+    使用reduce用lambda函数进行求和
+    :return:
+    '''
+    return reduce(lambda m, n : m + n, list)
+
 if __name__ == '__main__':
     list_num = [1, 2, 3, 4, 5, 6, 7, 8]
     result = get_number(list_num)
     print(result)
     result_py = use_py_sum(list_num)
     print(result_py)
+    result_reduce = get_sum_reduce(list_num)
+    print(result_reduce)
+    result_lambda_reduce = get_sum_lambda_reduce(list_num)
+    print(result_lambda_reduce)
+
+
+#编程练习
+'''
+任务
+
+1、定义use_reduce函数
+
+2、函数体内：实现某个数值的阶乘
+'''
+from functools import reduce
+
+def use_reduce(data):
+    #使用result接受reduce实现20的阶乘
+    result = reduce(lambda x, y: x * y, data)
+    return result
+
+#测试该功能
+if __name__ == '__main__':
+    data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    # 调用use_reduce传入数据data
+    result_data = use_reduce(data)
+    print(result_data)
