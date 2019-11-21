@@ -19,7 +19,7 @@ def test_work_tool():
     测试work包下面的tools模块
     :return:
     '''
-    file_name = 'c:\\user\\test\\desktop\\test.jpg'
+    file_name = 'c:\\user\\test.txt\\desktop\\test.txt.jpg'
     rest = get_file_type(file_name)
     print(rest)
 if __name__ == '__main__':

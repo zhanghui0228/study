@@ -41,10 +41,10 @@ print(os.getcwd())      #获取当前路径
 print(os.listdir())     #查看当前路径存在哪些文件
 
 #os.path对文件目录的操作：
-file = 'D:\\projects\\study\\module\\package\\test.py'
+file = 'D:\\projects\\study\\module\\package\\test.txt.py'
 print(os.path.isdir('pay'))     #判断是否为一个目录
 print(os.path.exists('pay'))    #判断是否存在
-print(os.path.isfile('test.py'))    #判断是否是一个文件
+print(os.path.isfile('test.txt.py'))    #判断是否是一个文件
 print(os.path.dirname(file))        #获取文件所在的路径
 print(os.path.split(file))          #将文件的路径和文件名称以元组的形式进行打印
 print(os.path.basename(file))       #打印文件的名称

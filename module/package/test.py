@@ -2,11 +2,11 @@
     这是自定义模块，模块名为test
 """
 def func():
-    print("this is module package test!")
+    print("this is module package test.txt!")
 
 def add(num1, num2):
     '''
-    this is function test!
+    this is function test.txt!
     '''
     print(num1 + num2)
 

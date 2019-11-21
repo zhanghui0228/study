@@ -22,7 +22,7 @@
 
     模块的属性：
         dir     --列出对象的所有属性及方法
-            ['__annotations__', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__','__package__', '__spec__', 'test']
+            ['__annotations__', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__','__package__', '__spec__', 'test.txt']
         help    --查看类，方法的帮助信息
         __name__    --模块的名称
         __file__    --文件全路径
