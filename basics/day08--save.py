@@ -6,9 +6,9 @@
 '''
 '''
 #生成散列值
-ha = hash("test")
+ha = hash("test.txt")
 print(ha)
-ha1 = hash("test")
+ha1 = hash("test.txt")
 print(ha1)
 '''
 #字典在项目中的使用

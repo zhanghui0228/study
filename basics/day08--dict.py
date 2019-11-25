@@ -72,7 +72,7 @@ employee.update(age = 30,clas = 'A2')
 print(employee)
 
 #字典的新增，与更新操作相同，原则：有责更新，无责新增
-employee['ddos'] = 'test'
+employee['ddos'] = 'test.txt'
 print(employee)
 
 #删除
