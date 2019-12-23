@@ -10,12 +10,17 @@
                 return warpper
 
 '''
+#<<<<<<< HEAD
 from functools import wraps
 
 
 #不使用装饰器进行实现以下内容
 
 
+#=======
+
+#不使用装饰器进行实现以下内容
+#>>>>>>> f244ce725db0bac7dc6c0b1769215a4f0ea96fda
 def python():
     print('正在安装>>>>>>>')
 
@@ -45,6 +50,7 @@ def nginx_warpper():
 
 if __name__ == '__main__':
     nginx_warpper()
+#<<<<<<< HEAD
     print('*' * 30)
 
 
