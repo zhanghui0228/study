@@ -49,4 +49,4 @@ print(os.path.dirname(file))        #获取文件所在的路径
 print(os.path.split(file))          #将文件的路径和文件名称以元组的形式进行打印
 print(os.path.basename(file))       #打印文件的名称
 print(os.path.splitext(file))       #将文件的路径（包含文件名，不包含后缀）和后缀名以元组的形式进行打印
-print(os.path.join(file, 'test1', 'hh'))      #以系统分隔符将内容进行整合拼接
+print(os.path.join(file, 'test1.txt', 'hh'))      #以系统分隔符将内容进行整合拼接
