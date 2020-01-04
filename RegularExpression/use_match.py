@@ -65,3 +65,23 @@ rsu = p.search(con)
 print(rsu)
 if rsu:
     print(rsu.group())
+    print('=' * 50)
+
+#使用group和groups对身份证号进行正则匹配
+
+def test_id_card():
+    id_1 = '145683199503239176'
+    id_2 = '14568319950323918X'
+    p = re.compile(r'(\d{6})(?P<year>\d{4})((\d{2})(\d{2}))(\d{2})(\d{1})([0-9]|X)')    #对分组进行命名    （?P<year>\d{3}）
+    result_1 = p.search(id_1)
+    #使用group()
+    print(result_1.group())
+    #使用group(2)
+    print(result_1.group(2))
+    #使用groups()
+    print(result_1.groups())
+    #使用groupdict()
+    print(result_1.groupdict())
+
+if __name__ == '__main__':
+    test_id_card()
