@@ -1,0 +1,55 @@
+1、django是什么？
+    开源免费的python高级web框架，内置电池，用与快速开发可靠、安全、可扩展的web应用
+
+2、django帮助文档
+    https://docs.djangoproject.com
+
+3、结构介绍：
+    模型（Model）
+    视图（view）
+    模板（template）
+
+4、开发流程
+    选择合适的版本
+    安装及配置基础环境
+    生成项目结构
+    内容开发
+    迭代、上线、维护
+
+5、查看django版本
+    import django
+    django.__version__
+
+6、生成目录结构
+    进入创建的虚拟环境，进入到需要创建的工作目录
+    通过命令生成模板
+    djang-admin startproject $my_project
+    进入目录结构
+    cd $my_project
+    启动服务器
+    python manager.py runserver
+
+7、django目录结构介绍
+    my_study    项目目录
+     |-- __init.py__     包的入口文件
+     |-- settings.py     项目配置文件
+     |-- urls.py         url访问地址配置文件
+     |-- wsgi.py         uwsgi配置
+    db.sqlite3          sqllite数据库
+    manage.py           命令管理工具
+
+8、网站开发
+    创建项目
+        django-admin命令行创建项目
+    创建accounts模块
+        python manage.py startapp accounts
+
+9、网站开发必备知识
+    url:
+        是统一资源定位符，对可以从互联网上得到的资源的位置和访问方法的一种简洁的表示，是互联网上标准资源的地址
+        互联网上每个文件都有一个唯一的url
+        基本url包含模式（或称协议）、服务器名称（或IP地址）、路径和文件名
+     url协议：
+        http--超文本传输协议资源
+        https--用安全套接字层传送的超文本传输协议
+        ftp--文件传输协议
