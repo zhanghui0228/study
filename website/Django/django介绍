@@ -49,7 +49,84 @@
         是统一资源定位符，对可以从互联网上得到的资源的位置和访问方法的一种简洁的表示，是互联网上标准资源的地址
         互联网上每个文件都有一个唯一的url
         基本url包含模式（或称协议）、服务器名称（或IP地址）、路径和文件名
-     url协议：
+    url协议：
         http--超文本传输协议资源
         https--用安全套接字层传送的超文本传输协议
         ftp--文件传输协议
+    常见的HTTP请求方式：
+        GET
+            可以用浏览器直接访问
+            请可以携带参数，但是有长度限制
+            请求参数直接放在url后面
+              带参数方法：url/?key=value&key=value
+        POST
+            不能用浏览器直接访问
+            对请求参数的长度没有限制
+            可以用来上传文件等需求
+    常见状态码：
+        2xx     请求成功
+            200     ok
+            201     created
+        3xx     重定向
+        4xx     请求错误
+            400     bad request
+            401     unauthorized(没有登陆)
+            403     forbidden(禁止)
+            404     not found
+        5xx     服务器错误
+9.1 url与配置及参数传递
+    url与视图的关系：
+        访问的地址在有一个对应的视图      index/  ---->   view
+    url匹配规则：
+        完整匹配：
+            ^index/$
+        正则匹配：
+            ^active/([0-9]{4})/$
+            http://localhost/active/2020/
+
+    url嵌套：
+        分模块设计url
+            根目录下的url:
+                url(r'^active/(?P<year>[0-9]{4})/$', views.active)
+            使用include包含其它模块的url
+                url(r'^app/oauth/', include('oauth.urls'))
+
+    如何设计优雅的url:
+        使用简洁的url
+            例：  http://localhost/active/?year=2020  优化后：http://localhost/active/2020
+        给url指定命名空间namespace
+            两种不同的角色访问不同的url，但是结果相同
+            urlpatterns = [
+                url(r'^author-poll/', include('polls.urls', namespace='author-poll')),
+                url(r'^publisher-poll/', include('polls.urls', namespace='publisher-poll'))
+            ]
+        给url指定名称name
+            url(r'^active/2020/$', views.active, name='active_date')
+         reverse逆向解析URL：
+                reverse('active_date', args=(2020,))
+          reverse逆向解析namespace的url：
+                reverse('accounts:index') #accounts为全局urls文件里定义的namespace名称；index为其它包模块中urls中定义的name
+
+    问题：
+        手动创建完templates（模板）目录后，访问url提示没有找到模板文件
+        解决方法：
+            在setting.py的TEMPLATES‘DIRS'[]加入模版路径，如下内容
+                os.path.join(BASE_DIR, 'templates')
+
+
+9.2 视图
+    一个视图函数，简称视图，是一个简单的python函数
+    接受一个请求，返回一个响应
+    响应可以是HTML内容、文本、图像，甚至是404、重定向等
+
+    9.2.1 定义视图：         --调用的模块from django.http import HttpResponse
+        def view_name()定义视图
+        实例：
+            def cutter(request):
+                html = "<html><body> it is new view!</body></html>"
+                return HttpResponse(html)
+
+    9.2.2 视图中获取url参数
+        正则获取url中的参数
+
+
