@@ -128,5 +128,20 @@
 
     9.2.2 视图中获取url参数
         正则获取url中的参数
+            url正则：
+                url(r'^active/?P<year>[0-9]{4}/$', views.year, name='year')
+            输入url：
+                http://localhost:8000/active/2020
+            视图编写：
+                def active(request, year):
+                    return HttpResponse('active : ' + year)
+        获取url中的请求（GET/POST）参数：
+            输入url：
+                http://localhost:8000/index/?year=2020
+            视图编写：
+                def index(request):
+                    year = request.GET.get('year', None)
+                    day = request.GET.get('day', 20)
 
-
+        返回HTML信息：
+            通过文件读取方式返回：

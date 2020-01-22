@@ -13,7 +13,12 @@ def index(request):
 
 
 def active(request, year):
-    return HttpResponse('active: '+ year)
+    '''获取url中的参数'''
+    #url访问方式:http://127.0.0.1:8000/active/2020/?month=12
+    month = request.GET.get('month', None)
+    # 获取GET中的参数
+    day = request.GET.get('day', '24')
+    return HttpResponse('active: ' + year + month + day)
 
 
 def now_time(request):
