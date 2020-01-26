@@ -24,5 +24,7 @@ urlpatterns = [
     # 使用include包含其它模块的url
     url(r'accounts/', include('accounts.urls', namespace='accounts')),
     #定义视图，展示当前的时间
-    url(r'^time/$', views.now_time, name='time')
+    url(r'^time/$', views.now_time, name='time'),
+    #读取html文件响应内容
+    url(r'^use/$', views.use_file, name='use')
 ]

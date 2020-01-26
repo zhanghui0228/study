@@ -1,7 +1,12 @@
 import datetime
+import os
 
 from django.http import HttpResponse
+from django.shortcuts import render, render_to_response
+from django.template import loader
 from django.urls import reverse
+
+from . import settings
 
 
 def index(request):
@@ -19,6 +24,31 @@ def active(request, year):
     # 获取GET中的参数
     day = request.GET.get('day', '24')
     return HttpResponse('active: ' + year + month + day)
+
+
+def use_file(request):
+    ''' 从HTML文件读取内容，并进行响应 '''
+    now = datetime.datetime.now()
+    # #原始方法，方法一：
+    # file_name = os.path.join(settings.BASE_DIR, 'templates', 'index.html')
+    # with open(file_name, 'r', encoding='utf-8') as f:
+    #     html = f.read()
+    # html = html.replace('0', now.strftime('%Y-%m-%d'))
+    # return HttpResponse(html)
+
+    # #方法二：   --使用django中提供的方法
+    # temp = loader.get_template('index.html')
+    # html = temp.render({        #render传递参数，在htnl模板文件中的参数名必须用{{}}进行括起来
+    #     #'模板中的参数': 需要传递的参数
+    #     'now_time': now
+    # })
+    # return HttpResponse(html)
+
+    # #方法三：   --使用render(request, template_name, 参数)函数
+    # return render(request, 'index.html', {'now_time': now})
+
+    #方法四：    --使用render_to_response(template_name, 参数)函数
+    return render_to_response('index.html', {'now_time':now})
 
 
 def now_time(request):
