@@ -1,8 +1,8 @@
 import datetime
 import os
 
-from django.http import HttpResponse
-from django.shortcuts import render, render_to_response
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, render_to_response, redirect
 from django.template import loader
 from django.urls import reverse
 
@@ -26,6 +26,7 @@ def active(request, year):
     return HttpResponse('active: ' + year + month + day)
 
 
+#使用html文件进行响应
 def use_file(request):
     ''' 从HTML文件读取内容，并进行响应 '''
     now = datetime.datetime.now()
@@ -74,3 +75,23 @@ def now_time(request):
     """.format(now)
     #响应
     return HttpResponse(html)
+
+
+#重定向
+def index_one(request):
+    ''' 重定向练习, 访问index1时，重定向到index two '''
+    #方法一：
+    # url = reverse('index_two')
+    # #使用redirect()函数进行重定向
+    # return redirect(url)
+    # # 使用HttpResponseRedirect()函数进行重定向
+    # # return HttpResponseRedirect(url)
+    # #return HttpResponse('index one')
+
+    #方法二：   直接指定url中定义的name
+    return redirect('index_two')
+
+
+def index_two(request):
+    ''' 重定向练习， index2 '''
+    return HttpResponse('index two')

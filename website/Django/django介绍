@@ -146,6 +146,7 @@
         返回HTML信息：
             通过文件读取方式返回：
             使用loader.get_template 读取
+                loader.get_template('index.html')
             直接使用render函数
                 #render传递参数，在htnl模板文件中的参数名必须用{{}}进行括起来
                 return render(request, template_name, 参数)
@@ -153,3 +154,12 @@
                 return render_to_response(template_name, 参数)
 
     9.2.3  重定向
+        实现url访问的重定向
+            可以使用reverse(url名称) 逆向解析指定url中定义的name
+            使用HttpResponseRedirect重定向
+                return HttpResponseRedirect(逆向解析url)
+            使用redirect()快捷方式
+                redirect(url)
+               或者   redirect(url中定义的name)
+
+    9.2.4 内置视图及重写

@@ -26,5 +26,9 @@ urlpatterns = [
     #定义视图，展示当前的时间
     url(r'^time/$', views.now_time, name='time'),
     #读取html文件响应内容
-    url(r'^use/$', views.use_file, name='use')
+    url(r'^use/$', views.use_file, name='use'),
+
+    #重定向
+    url(r'^index1/$', views.index_one, name='index_one'),
+    url(r'^index/two/$', views.index_two, name='index_two')
 ]
