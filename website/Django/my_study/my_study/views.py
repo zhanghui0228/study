@@ -22,7 +22,9 @@ def active(request, year):
     #url访问方式:http://127.0.0.1:8000/active/2020/?month=12
     month = request.GET.get('month', None)
     # 获取GET中的参数
-    day = request.GET.get('day', '24')
+    day = request.GET.get('day', '00')
+    # # 重写500错误代码响应
+    # raise
     return HttpResponse('active: ' + year + month + day)
 
 
@@ -95,3 +97,13 @@ def index_one(request):
 def index_two(request):
     ''' 重定向练习， index2 '''
     return HttpResponse('index two')
+
+
+def page_500(request):
+    ''' 重写500错误响应视图 '''
+    return HttpResponse("系统正在维护中......")
+
+
+def page_404(request):
+    ''' 重写404错误响应视图 '''
+    return HttpResponse('访问资源不存在！')

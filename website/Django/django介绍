@@ -163,3 +163,30 @@
                或者   redirect(url中定义的name)
 
     9.2.4 内置视图及重写
+        内置的错误处理视图：
+            错误代码：
+                400 Bad Request(请求参数错误)
+                403 Forbidden
+                404 Not Found
+                500 Internal Server Error
+            a、 在项目urls.py中添加配置
+                handler500 = 'my_study.views.page_500'
+                handler404 = 'my_study.views.page_404'
+            b、 在项目views.py中添加对应的视图函数
+                def page_500(request):
+                    return HttpResponse('系统正在维护中')
+            c、 DEBUG模式修改为 False
+
+        static.server处理静态文件：
+            a、 在项目setting.py中添加配置
+                MEDIA_URL = '/media/'       #media为存放静态文件(用户上传的图片文件等)的目录（可自定义其它名称），与manage.py文件同级
+               MEDIA_ROOT = os.path.join(BASE_DIR, 'medias')
+            b、 在项目urls.py中添加配置
+                from django.views.static import serve
+                urlpatterns += [
+                    url(r'^media/(?P<path>.*)$', serve, {
+                        'document_root': settings.MEDIA_ROOT,
+                    }),
+                ]
+            c、 访问url:
+                http://127.0.0.1:8000/media/images/22.jpg

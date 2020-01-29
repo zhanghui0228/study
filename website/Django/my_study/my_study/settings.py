@@ -23,7 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '41+%3ja+5mm6$0ryr)^=)efa$97vln=$olmt&k%3+*schqa60z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+'''
+    生产环境改为 False
+    开发环境改为 True
+'''
+DEBUG = False
 
 ALLOWED_HOSTS = ['*',]
 
@@ -118,3 +122,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 用户上传的文件路径
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
