@@ -190,3 +190,40 @@
                 ]
             c、 访问url:
                 http://127.0.0.1:8000/media/images/22.jpg
+
+    9.2.5 请求响应对象（request对象）
+        响应过程：
+            浏览器输入url  ----发送请求---->  服务器  ----得到响应---->  浏览器显示页面内容等
+        请求对象 HttpRequest
+            请求方式method(POST/GET/...)
+            请求头信息META（源数据）
+                REMOTE_ADDR     请求的IP地址
+                HTTP_USER_AGENT     用户请求终端信息
+            获取请求传递参数
+                GET----GET请求参数
+                POST----POST请求参数
+                COOKIES----cookie信息
+                FILES----文件信息
+            获取信息：
+                ip = request.META['REMOTE_ADDR']  # 远程访问地址
+                user_agent = request.META['HTTP_USER_AGENT']    # 用户的浏览器
+                host = request.get_host()   # 访问地址
+                path = request.path()  # 请求路径
+
+        响应对象 HttpResponse：
+            常见的Content-Type
+                text/html   超文本标记语言文本（HTML）
+                text/plain      普通文本
+                text/xml        xml文档
+                image/png、 image/jpeg、 image/gif        图片或图形
+                application/json        json数据类型
+
+            响应对象：
+                HttpResponse
+                HttpResponseRedirect    #重定向
+                JsonResponse        #响应json
+                FileResponse        #响应文件
+
+            响应状态码：
+                status  查看HTTP状态响应码
+                status_code     查看HTTP响应状态码

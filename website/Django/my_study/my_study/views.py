@@ -28,7 +28,7 @@ def active(request, year):
     return HttpResponse('active: ' + year + month + day)
 
 
-#使用html文件进行响应
+# 使用html文件进行响应
 def use_file(request):
     ''' 从HTML文件读取内容，并进行响应 '''
     now = datetime.datetime.now()
@@ -79,7 +79,7 @@ def now_time(request):
     return HttpResponse(html)
 
 
-#重定向
+# 重定向
 def index_one(request):
     ''' 重定向练习, 访问index1时，重定向到index two '''
     #方法一：
@@ -98,7 +98,7 @@ def index_two(request):
     ''' 重定向练习， index2 '''
     return HttpResponse('index two')
 
-
+# 重写错误代码
 def page_500(request):
     ''' 重写500错误响应视图 '''
     return HttpResponse("系统正在维护中......")
@@ -107,3 +107,47 @@ def page_500(request):
 def page_404(request):
     ''' 重写404错误响应视图 '''
     return HttpResponse('访问资源不存在！')
+
+
+# 请求对象打印
+def print_request(request):
+    ''' 打印请求对象 '''
+    print(request)
+    print('-' * 50)
+    # ip = request.META['REMOTE_ADDR']  # 远程访问地址
+    user_agent = request.META['HTTP_USER_AGENT']    # 用户的浏览器
+    print(user_agent)
+    print(request.get_host())   # 访问地址
+    # print(request.path())   # 请求路径
+    print('-' * 50)
+    return HttpResponse('hello request')
+
+
+# 响应对象
+def print_resp(request):
+    ''' 响应对象  '''
+    # 以文本方式进行响应输出
+    now = datetime.datetime.now()
+    temp = loader.get_template('index.html')
+    html = temp.render({        # render传递参数，在htnl模板文件中的参数名必须用{{}}进行括起来
+        # '模板中的参数': 需要传递的参数
+        'now_time': now
+    })
+    return HttpResponse(html, content_type='text/plain')
+
+
+def print_json(request):
+    ''' 响应json对象 '''
+    user_info = {
+        'username': '张三',
+        'passwd': '123456'
+    }
+    # # 方式一： 使用HttpResponse中的application/json进行响应
+    # import json
+    # # python字典转换为json格式
+    # user_info = json.dumps(user_info)
+    # return HttpResponse(user_info, content_type='application/json', )
+
+    # 方式二： 使用JsonResponse进行响应
+    from django.http import JsonResponse
+    return JsonResponse(user_info)

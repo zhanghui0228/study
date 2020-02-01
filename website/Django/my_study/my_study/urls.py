@@ -42,7 +42,14 @@ urlpatterns = [
 
     # 重定向
     url(r'^index1/$', views.index_one, name='index_one'),
-    url(r'^index/two/$', views.index_two, name='index_two')
+    url(r'^index/two/$', views.index_two, name='index_two'),
+
+    # 打印请求对象
+    url(r'^print/request/$', views.print_request, name='print_request'),
+    # 响应文本对象
+    url(r'^print/resp/$', views.print_resp, name='print_resp'),
+    # 响应json对象
+    url(r'^print/json/$', views.print_json, name='print_json')
 
 ]
 # 添加自定义的静态文件目录访问（用户自己上传的一些文件）
