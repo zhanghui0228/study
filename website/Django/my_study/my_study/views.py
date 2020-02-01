@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response, redirect
 from django.template import loader
 from django.urls import reverse
+from django.views.generic import TemplateView
 
 from . import settings
 
@@ -151,3 +152,28 @@ def print_json(request):
     # 方式二： 使用JsonResponse进行响应
     from django.http import JsonResponse
     return JsonResponse(user_info)
+
+
+def print_attr(request):
+    now = datetime.datetime.now()
+    ''' 响应对象 状态码'''
+    resp =  HttpResponse('响应对象', status=202)
+    # 重新设置HTTP的状态码
+    resp.status_code = 206
+    # 写入响应内容
+    resp.write(now)
+    return resp
+
+
+def print_image(request):
+    ''' 打印图片 FileResponse '''
+    from django.http import FileResponse
+    file_name = os.path.join(settings.BASE_DIR, 'media/images/22.jpg')
+    f = open(file_name, 'rb')
+    return FileResponse(f, content_type='image/jpg')
+
+
+# 使用class来改写视图
+class ShowClassView(TemplateView):
+    ''' class 视图 '''
+    template_name = 'show_class.html'

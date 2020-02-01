@@ -49,8 +49,13 @@ urlpatterns = [
     # 响应文本对象
     url(r'^print/resp/$', views.print_resp, name='print_resp'),
     # 响应json对象
-    url(r'^print/json/$', views.print_json, name='print_json')
-
+    url(r'^print/json/$', views.print_json, name='print_json'),
+    # 打印响应对象  状态码
+    url(r'^print/resp/attr/$', views.print_attr, name='print_attr'),
+    # 打印图片 FileResponse
+    url('^print/image/$', views.print_image, name='print_image'),
+    # 使用class来改写视图
+    url('^show/class/$', views.ShowClassView.as_view(), name='show_class'),
 ]
 # 添加自定义的静态文件目录访问（用户自己上传的一些文件）
 urlpatterns += [

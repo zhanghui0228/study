@@ -217,6 +217,7 @@
                 text/xml        xml文档
                 image/png、 image/jpeg、 image/gif        图片或图形
                 application/json        json数据类型
+                application/vnd.ms-excel    excel数据类型
 
             响应对象：
                 HttpResponse
@@ -227,3 +228,30 @@
             响应状态码：
                 status  查看HTTP状态响应码
                 status_code     查看HTTP响应状态码
+                content_type    设置响应的类型
+                write()         写入响应内容
+
+    9.2.6 是哟class重写视图
+        基于类的视图：
+            视图是一个可调用对象，可以接收一个请求然后返回一个响应
+            基于类的视图可以结构化视图
+            基于类的视图可以利用继承和混合重用代码
+            内置的视图拿来即用，代码更简洁
+
+         TemplateView
+            步骤一：继承视图
+                django.views.generic.TemplateView
+            步骤二：配置模板地址
+                    class ShowClassView(TemplateView):
+                    ''' class 视图 '''
+                    template_name = 'show_class.html'
+            步骤三：配置url
+                url('^show/class/$', views.ShowClassView.as_view(), name='show_class'),
+
+         TemplateView原理解析
+            从项目主目录寻找模板文件
+            从app的模板目录寻找模板文件
+
+        django内置通用视图
+            django.views.generic.ListView       列表类数据的封装，如：商品列表     支持分页
+            django.views.generic.DetailView     详情类数据的封装，如：商品详情
