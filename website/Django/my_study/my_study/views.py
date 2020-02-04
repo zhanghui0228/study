@@ -198,4 +198,31 @@ def templ_images(request):
     }
     # 渲染list格式的python对象
     list_city = ['GJ', 'SH', 'SZ']
-    return render(request, 'image.html', {'img_url': img_url, "user_info": user_info, "list_city": list_city})
+    # 渲染list嵌套dict格式的python对象
+    list_prods = [
+        {"name": "名称一", "price": 100},
+        {"name": "名称二", "price": 120},
+        {"name": "名称三", "price": 160},
+    ]
+    return render(request, 'image.html', {'img_url': img_url, "user_info": user_info, "list_city": list_city, "list_prods": list_prods})
+
+
+# 模板标签使用
+def templ_tag(request):
+    ''' 模板标签使用 '''
+    # 渲染list格式的python对象
+    list_city = ['GJ', 'SH', 'SZ']
+    # 渲染list嵌套dict格式的python对象
+    list_prods = [
+        {"name": "名称一", "price": 100},
+        {"name": "名称二", "price": 120},
+        {"name": "名称三", "price": 160},
+    ]
+    list_order = []
+    # 标签使用for循环对象 渲染对象dict
+    list_info = {
+        'name': "张三",
+        'age': 18,
+        'phone': 12345678901
+    }
+    return render(request, 'tag.html', {'list_city': list_city, 'list_prods': list_prods, 'list_order': list_order, 'list_info': list_info})

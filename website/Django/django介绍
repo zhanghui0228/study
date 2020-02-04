@@ -347,7 +347,41 @@
                 {{ object.attribute }}
             dict类型数据的渲染
             list/tuple类型数据的渲染
+            list/tuple嵌套dict复杂类型数据的渲染
 
             渲染python中的对象：
                 python对象： user_info = {"name": "zhangsan", "age": 18}
                 模板文件中渲染： <p> name: {{ user_info.name }}  age: {{ user_info.age }} </p>
+
+    9.3.4 模板标签使用 --语法使用
+        语法：
+            {{% tag %}
+        循环控制：
+            {% for item in data_list %}
+            <li>{{ 内容 }}<li>
+            {% empty %}
+                内容为空
+            {% endfor %}
+         for循环控制，并以逆序方式进行展示：
+            {% for item in data_list reversed %}
+                {{ item }}
+            {% endfor %}
+        条件控制：
+            {% if condition_a %}
+                满足a条件
+            {% elif condition_b %}
+                满足b条件
+            {% else %}
+                都不满足
+            {% endif %}
+        其它条件控制：
+            and, or, ==, !=, >, <, >=, <=, in, not in, is
+        添加注释：
+            {# 注释内容 #}
+
+    9.3.5 模板标签使用  --当前时间显示
+        for循环对象，渲染dict：
+            语法：
+                {% for key, value in data.items %}
+                    {{ key }} : {{ value }}
+                {% endfor %}

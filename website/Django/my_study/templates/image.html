@@ -28,6 +28,14 @@
         </ol>
     </p>
     <p>
+        <h1>渲染list嵌套dict格式的python对象</h1>
+        <ul>
+            <li>{{ list_prods.0.name }} : {{ list_prods.0.price }}</li>
+            <li>{{ list_prods.1.name }} : {{ list_prods.1.price }}</li>
+            <li>{{ list_prods.2.name }} : {{ list_prods.2.price }}</li>
+        </ul>
+    </p>
+    <p>
         <h1>渲染静态图片</h1>
         <img src="{{ img_url }}" alt="图片" />
     </p>

@@ -56,6 +56,12 @@ urlpatterns = [
     url('^print/image/$', views.print_image, name='print_image'),
     # 使用class来改写视图
     url('^show/class/$', views.ShowClassView.as_view(), name='show_class'),
+    # 模板引擎选择
+    url(r'^templ/show/$', views.templ_show, name='templ_show'),
+    # 渲染静态图片 + 渲染python中的对象
+    url(r'^templ/images/$', views.templ_images, name='templ_images'),
+    # 模板标签使用
+    url(r'^templ/tag/$', views.templ_tag, name='templ_tag'),
 ]
 # 添加自定义的静态文件目录访问（用户自己上传的一些文件）
 urlpatterns += [
