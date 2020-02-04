@@ -231,7 +231,7 @@
                 content_type    设置响应的类型
                 write()         写入响应内容
 
-    9.2.6 是哟class重写视图
+    9.2.6 使用class重写视图
         基于类的视图：
             视图是一个可调用对象，可以接收一个请求然后返回一个响应
             基于类的视图可以结构化视图
@@ -255,3 +255,99 @@
         django内置通用视图
             django.views.generic.ListView       列表类数据的封装，如：商品列表     支持分页
             django.views.generic.DetailView     详情类数据的封装，如：商品详情
+
+        settings配置文件里的INSTALLED_APPS中加入app名称：
+            appname.apps.AppnameConfig      # app模块
+        app目录下创建templates目录，用于存放静态html文件
+        app下的urls.py文件：
+            url(r'^index/$', views.index, name='index')
+        app下的views.py指定templates的html
+            from django.shortcuts import render
+            def index(request):
+                return render(request, template_name='index.html')
+         或者：
+            def index(request, template_name='index.html'):
+                return render(request, template_name)
+        在全局urls.py里配置app访问url
+            r('^appname/', include('appname.urls', namespace='appname'))
+
+9.3 django模板语法
+    9.3.1 template介绍：
+        模板和模板引擎：
+            模板具有一定的格式或骨架，可以动态生成HTML
+            模板引擎决定以何种方式组织代码
+            一个项目可以有一个或者多个模板引擎
+                DTL     Jinja2
+            DTL(Django Template Language)是django原生的模板系统
+                直到django1.8，唯一的模板引擎支持
+            Jinja2：
+                官网地址： docs.jinkan.org/docs/jinja2
+                速度更快，python的功能齐全的开源模板引擎
+             安装：
+                pip install jinja2
+        渲染机制：
+            没有模板引擎的情况下在浏览器展示HTML：
+                a、从磁盘读取html字符串
+                b、将满足特定规则的内容进行替换
+                c、发送浏览器进行展示
+            django模板引擎的渲染机制：
+                步骤一：从磁盘读取模板文件（get_template）
+                步骤二：选择合适的模板引擎（select_template）
+                步骤三：将制定内容对模板进行渲染（render）
+                步骤四：发送给浏览器显示
+
+        jinja2语法：
+            # 定义变量
+                <body>user:{{username}}</body>      {{}}里定义的是变量
+
+    9.3.2 templates相关配置
+        配置文件：
+            settings.py ---->  TEMPLATES中进行配置
+        配置选项：
+            BACKEND ---->模板引擎配置
+                django.template.backends.django.DjangoTemplates
+                django.template.backends.jinja2.Jinja2
+            DIRS ---->模板引擎按列表顺序搜索这些目录以查找模板源文件
+            APP_DIRS ---->决定模板引擎是否应该进入每个已安装的应用中查找模板
+                每种模板引擎后端都定义了一个惯用的名称作为应用内部存放模板的子目录名称
+                    DTL ---->templates目录
+                    Jinja2 ---->jinja2目录
+            OPTIONS ---->其他选项配置
+        同时支持两种模板引擎：
+            添加模板配置引擎支持：
+                TEMPLATES = [
+                    {'BACKEND': 'django.template.backends.django.DjangoTemplates',
+                        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+                    },
+                    {'BACKEND': 'django.template.backends.jinja2.Jinja2',
+                        'DIRS': [os.path.join(BASE_DIR, 'jinja2')],
+                    }
+                ]
+            模板文件查找规则get_template('detail.html')
+                安装配置文件中配置的顺序进行依次查找：
+                    templates/datail.html
+                    jinja2/datail.html
+                    app/templates/datail.html
+
+    9.3.3 模板变量使用：
+        渲染python中的变量：
+            语法：
+                {{ variable }}
+            当模板引擎遇到一个变量，它将计算这个变量，然后用结果替换掉它本身
+            变量名称中不能有空格或者标点符号
+
+            渲染静态图片：
+                图片地址    img_url = '/imges/22.jpg'
+                模板文件中渲染     <img src="{{ img_url }}" alt='图片' />
+                注意：
+                    需要在urls.py文件中配置静态文件目录访问url，否则会有问题
+
+        渲染python中的对象：
+            语法：
+                {{ object.attribute }}
+            dict类型数据的渲染
+            list/tuple类型数据的渲染
+
+            渲染python中的对象：
+                python对象： user_info = {"name": "zhangsan", "age": 18}
+                模板文件中渲染： <p> name: {{ user_info.name }}  age: {{ user_info.age }} </p>

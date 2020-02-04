@@ -177,3 +177,25 @@ def print_image(request):
 class ShowClassView(TemplateView):
     ''' class 视图 '''
     template_name = 'show_class.html'
+
+
+# 模板引擎选择
+def templ_show(request):
+    '''模板引擎选择'''
+    # return render(request, "detail.html")
+    return render(request, "app.html")
+
+
+# 渲染静态图片
+def templ_images(request):
+    ''' 渲染模板文件 '''
+    # 渲染静态图片
+    img_url = "/media/images/22.jpg"
+    # 渲染dict格式的python对象
+    user_info = {
+        "name": "张三",
+        "age": 18
+    }
+    # 渲染list格式的python对象
+    list_city = ['GJ', 'SH', 'SZ']
+    return render(request, 'image.html', {'img_url': img_url, "user_info": user_info, "list_city": list_city})

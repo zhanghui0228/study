@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>image</title>
+</head>
+<body>
+
+    <p>
+        <h1>渲染dict格式的python对象</h1>
+        <ul>
+            <li>
+                username: {{ user_info.name }}
+            </li>
+        </ul>
+        <ul>
+            <li>
+                age: {{ user_info.age }}
+            </li>
+        </ul>
+    </p>
+    <p>
+        <h1>渲染list格式的python对象</h1>
+        <ol>
+            <li>{{ list_city.0 }}</li>
+            <li>{{ list_city.1 }}</li>
+            <li>{{ list_city.2 }}</li>
+        </ol>
+    </p>
+    <p>
+        <h1>渲染静态图片</h1>
+        <img src="{{ img_url }}" alt="图片" />
+    </p>
+</body>
+</html>
