@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>filter title</title>
+</head>
+<body>
+    <p>
+        <h2>当前时间</h2>
+        <h4>使用过滤器格式化时间格式</h4>
+        {# 时间格式进行格式化 #}
+        {{ now|date:"Y-m-d H:i:s" }}
+    </p>
+    <p>
+        <h2>模板过滤器使用</h2>
+        <h4>字母大写</h4>
+        <ul>
+            {% for item in list_word %}
+            {# 字母大写upper #}
+            <li>{{ item|upper }}</li>
+            {% endfor %}
+        </ul>
+        <h4>首字母大写</h4>
+        <ol>
+            {% for item in list_word %}
+            <li>{{ item|capfirst }}</li>
+            {% endfor %}
+        </ol>
+        <h4>字母小写</h4>
+        <ol>
+            {% for item in list_word %}
+            <li>{{ item|lower }}</li>
+            {% endfor %}
+        </ol>
+    </p>
+    <p>
+        <h4>过滤器默认值使用</h4>
+        name : {{ user_info.name }}<br>
+        age : {{ user_info.age|default_if_none:"未知值" }}<br>
+        sex : {{ user_info.sex|default:"不详" }}<br>
+    </p>
+    <p>
+        <h4>数字四舍五入显示, 保留小数点三位</h4>
+        数字 ： {{ pi|floatformat:3 }}
+    </p>
+</body>
+</html>

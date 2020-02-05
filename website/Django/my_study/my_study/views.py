@@ -229,3 +229,24 @@ def templ_tag(request):
         'phone': 12345678901
     }
     return render(request, 'tag.html', {'list_city': list_city, 'list_prods': list_prods, 'list_order': list_order, 'list_info': list_info})
+
+
+# 模板过滤器使用
+def templ_filter(request):
+    '''模板过滤器使用'''
+    # 使用过滤器字母进行大写
+    list_word = [
+        'name',
+        'age',
+        'module',
+        'STATUS'
+    ]
+    now = datetime.datetime.now()
+    user_info = {
+        'name': "张三",
+        'age': None,
+        'sex': ''
+    }
+    import math
+    pi = math.pi
+    return render(request, 'filter.html', {'list_word': list_word, 'now': now, 'user_info': user_info, 'pi': pi})

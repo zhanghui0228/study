@@ -431,3 +431,23 @@
                 {% now "jS F Y H:i" %}
 
     9.3.6 模板过滤器
+        过滤器语法：
+            {{ value|filter_name: params }}
+        使用过滤器将字母进行大写：
+            {{ value|upper }}
+        使用过滤器将首字母进行大写:
+            {{ value|capfirst }}
+        使用过滤器将字母进行小写
+            {{ value|lower }}
+        日期对象格式化：
+            {{ value|date:"D d M Y" }}
+          示例：
+            {{ now|date:"Y-m-d H:i:s" }}
+
+    9.3.7 过滤器：
+        对变量进行特殊处理后，在进行渲染
+        默认值显示：
+            {{ value|default:"" }}      # python对象可以为 '' 或者为 False 即可触发
+            {{ value|default_if_none:"无" }}     # python对象为 None 时即可触发
+        数字四舍五入显示：
+            {{ value|floatformat:3 }}     # 保留小数点三位进行显示

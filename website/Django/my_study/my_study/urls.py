@@ -62,6 +62,8 @@ urlpatterns = [
     url(r'^templ/images/$', views.templ_images, name='templ_images'),
     # 模板标签使用
     url(r'^templ/tag/$', views.templ_tag, name='templ_tag'),
+    # 模板过滤器使用
+    url(r'^templ/filter/$', views.templ_filter, name='templ_filter'),
 ]
 # 添加自定义的静态文件目录访问（用户自己上传的一些文件）
 urlpatterns += [
