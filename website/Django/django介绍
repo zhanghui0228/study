@@ -366,6 +366,11 @@
             {% for item in data_list reversed %}
                 {{ item }}
             {% endfor %}
+         for循环控制，展示前置下标
+            {% for item in data_list %}
+                {{ forloop.counter }}:
+                {{ item }}
+            {% endfor %}
         条件控制：
             {% if condition_a %}
                 满足a条件
@@ -385,3 +390,44 @@
                 {% for key, value in data.items %}
                     {{ key }} : {{ value }}
                 {% endfor %}
+        重复循环：
+            语法：
+                {% cycle 'row1' 'row2' %}
+            示例：
+            <head>
+                <meta charset="UTF-8">
+                <title>tag</title>
+                <style type="text/css">
+                    .row1 {
+                        background: red;
+                        color: white;
+                    }
+                </style>
+            </head>
+            <body>
+                 <ul>
+                    {% for item in list_prods reversed %}
+                    <li class="{% cycle 'row1' 'row2' 'row3' %}">
+                        {# 展示前置下标 #}
+                        {{ forloop.counter }} :
+                        {{ item.name }}: {{ item.price }}
+                    </li>
+                     {% endfor %}
+                </ul>
+            </body>
+
+        url标签使用：
+            语法：
+                {% url 'url_name' params %}
+            示例：
+                根据name进行解析url
+                <a href="{% url 'templ_images' %}" target="_blank">渲染静态图片url</a>    # templ_images是urls.py文件中定义的url name
+                根据带参数进行解析url
+                <a href="{% url 'active_date' 2021 %}?month=12" target="_blank">带参数的解析url</a>   # 2021 和 ?month=12 为传入的参数
+                根据带命名空间进行解析url
+                <a href="{% url 'accounts:show_class' %}" target="_blank">带命名空间进行解析url</a>  # accounts为命名空间 :show_class 为app中的urls.py name
+        当前时间显示：
+            语法：
+                {% now "jS F Y H:i" %}
+
+    9.3.6 模板过滤器

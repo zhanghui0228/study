@@ -217,6 +217,9 @@ def templ_tag(request):
         {"name": "名称一", "price": 100},
         {"name": "名称二", "price": 120},
         {"name": "名称三", "price": 160},
+        {"name": "名称四", "price": 160},
+        {"name": "名称五", "price": 160},
+        {"name": "名称六", "price": 160},
     ]
     list_order = []
     # 标签使用for循环对象 渲染对象dict

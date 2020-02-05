@@ -3,8 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>tag</title>
+    <style type="text/css">
+        .row1 {
+            background: red;
+            color: white;
+        }
+        .row2 {
+            background: blue;
+            color: white;
+        }
+        .row3 {
+            background: green;
+            color: white;
+        }
+    </style>
 </head>
 <body>
+    {# 打印当前时间 #}
+    <p>
+        <h1>当前时间</h1>
+        <h5>当前时间：{% now "jS F Y H:i" %}</h5>
+    </p>
     {# 模板标签 for循环 使用 #}
     <p>
         <h1>模板标签for循环使用</h1>
@@ -29,7 +48,9 @@
         <h3>逆序展示</h3>
             <ul>
                 {% for item in list_prods reversed %}
-                <li>
+                <li class="{% cycle 'row1' 'row2' 'row3' %}">
+                    {# 展示前置下标 #}
+                    {{ forloop.counter }} :
                     {{ item.name }}: {{ item.price }}
                 </li>
             {% endfor %}
@@ -53,6 +74,17 @@
             </li>
             {% endfor %}
         </ul>
+        {# 根据urls.py中的url定义的name来进行解析url #}
+        <h2>url模板标签使用</h2>
+        <h4>根据name进行解析url</h4>
+        <a href="{% url 'templ_images' %}" target="_blank">渲染静态图片url</a>
+
+        {# 根据带参数的url进行解析url #}
+        <h4>根据带参数进行解析url</h4>
+        <a href="{% url 'active_date' 2021 %}?month=12" target="_blank">带参数的解析url</a>
+        {# 带命名空间进行解析url #}
+        <h4>带命名空间进行解析url</h4>
+        <a href="{% url 'accounts:show_class' %}" target="_blank">带命名空间进行解析url</a>
     </p>
 
 </body>
