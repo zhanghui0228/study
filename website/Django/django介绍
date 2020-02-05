@@ -451,3 +451,10 @@
             {{ value|default_if_none:"无" }}     # python对象为 None 时即可触发
         数字四舍五入显示：
             {{ value|floatformat:3 }}     # 保留小数点三位进行显示
+        富文本内容转义显示：
+            {{ value|safe }}
+            <script>alert('SUCESS')</script>
+        字符串截取：
+            {{ value|truncatechars:9 }}
+            {{ value|truncatechars_html:9 }}
+            {{ value|truncatewords:2 }}

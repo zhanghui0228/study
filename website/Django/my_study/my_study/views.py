@@ -247,6 +247,9 @@ def templ_filter(request):
         'age': None,
         'sex': ''
     }
+    # 数字四舍五入显示
     import math
     pi = math.pi
-    return render(request, 'filter.html', {'list_word': list_word, 'now': now, 'user_info': user_info, 'pi': pi})
+    # 富文本展示
+    html = '<h1>富文本展示,截取字符串</h1>' # <script>alert("跳转中...")</script>
+    return render(request, 'filter.html', {'list_word': list_word, 'now': now, 'user_info': user_info, 'pi': pi, 'html': html})

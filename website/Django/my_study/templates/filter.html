@@ -42,6 +42,11 @@
     <p>
         <h4>数字四舍五入显示, 保留小数点三位</h4>
         数字 ： {{ pi|floatformat:3 }}
+        <h4>html富文本显示</h4>
+            html富文本：{{ html }}<br>
+            html富文本转义显示：{{ html|safe }}
+        <h4>截取字符串</h4>
+            {{ html|safe|truncatechars:9 }}
     </p>
 </body>
 </html>
