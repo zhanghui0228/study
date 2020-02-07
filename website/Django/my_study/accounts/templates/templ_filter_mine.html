@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load accounts_extras %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义过滤器</title>
+    <style type="text/css">
+        .text-red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>自定义过滤器</h2>
+    <h5>首字母为红色</h5>
+    <ol>
+        {% for sum in list_filter %}
+        <li>{{ sum|warning|safe }}</li>
+        {% endfor %}
+    </ol>
+    <h5>用逗号分隔数据</h5>
+    <p>
+        {{ sum_list|account_sum:2 }}
+    </p>
+</body>
+</html>

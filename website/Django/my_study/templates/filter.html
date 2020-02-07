@@ -46,7 +46,8 @@
             html富文本：{{ html }}<br>
             html富文本转义显示：{{ html|safe }}
         <h4>截取字符串</h4>
-            {{ html|safe|truncatechars:9 }}
+            {{ html|truncatechars:9|safe }}<hr>
+            {{ html|truncatechars_html:9|safe }}
     </p>
 </body>
 </html>
