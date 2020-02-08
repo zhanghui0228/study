@@ -483,8 +483,34 @@
         切记： 添加完自定义过滤器后要重启开发服务器
 
     9.3.9 模板的抽象和继承
-        步骤一：将可变的部分圈出来（base.html）
-            {% block sidebar %}
-                <!--菜单栏的内容-->
-            {% endblock %}
-        步骤二：
+        模板继承：
+            步骤一：将可变的部分圈出来（base.html）
+                {% block sidebar %}
+                    <!--菜单栏的内容-->
+                {% endblock %}
+            步骤二：继承父模板
+                {% extends "base.html" %}
+            步骤三：填充新的内容（index.html）
+                {% extends "base.html" %}
+                {% block sidebar %}
+                    <!-- 新的菜单栏内容 -->
+                {% endblock %}
+            步骤四：复用父模板的内容（可选）
+                {% extends "base.html" %}
+                {% block sidebar %}
+                    {{ supper }}
+                    <!-- 新的菜单栏内容 -->
+                {% endblock %}
+        模板中添加公共部分：
+            步骤一：将可变的部分拆出来（footer.html）
+                <footer>
+                    这是页脚公共的部分
+                </footer>
+            步骤二：将拆出来的部分包起来（index.html）
+                {% extends "base.html" %}
+                {% block content %}
+                    <!-- 页面主要内容区域 -->
+
+                    {# 公用的footer #}
+                    {% include "footer.html" %}
+                {% endblock %}
