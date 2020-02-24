@@ -36,3 +36,96 @@ ORM特性：
             'django.db.backends.oracle',
             ]
     1.3 常见类型
+        数据库中的常用字段类型
+            char            固定长度字符
+            varchar         可变长度字符串
+            int             整形
+            datetime        时间
+            float/decimal   浮点数/小数
+            text            长文本
+
+        类型的选项：
+            null、blank          是否为Null、空值
+            db_column            数据库表中对应的字段名称
+            default              不填写改字段值时的默认值
+            primary_key          主键
+            unique               唯一索引
+            verbose_name         供编程查看的字段名称（便于阅读）
+            help_text            帮助文字
+            choices              可供选择的选项，如：性别选项（男、女）
+            get_FOO_display()    展示choices对应的值
+
+        django中常见的类型：
+            CharField、TextField     字符串、文本
+            DateField、DatetimeField     日期时间
+            FileField、ImageField        文件、图片
+            IntegerField、SmallIntegerField      整数
+            FloatField、DecimalField     小数
+                CharField类型：
+                    max_length      最大长度
+                    相关类型：
+                        EmailField      邮件输入（只能输入邮件地址）
+                        URLField        URL输入
+                        TextField       长文本输入
+                        FilePathField       文件路径输入
+                        ImageField      图片输入
+                DatetimeField类型：
+                    auto_now            更新时间为记录更改时的时间
+                    auto_now_add        记录创建时间
+
+        常见类型创建：
+            在app目录下的models.py文件中创建数据库模型
+                class Student(models.Model):
+                    ''' 学生表 '''
+                    name = models.CharField(max_length=64, verbose_name='姓名')
+                    sex = models.CharField('性别', max_length=1, choices=(
+                        ('1', '男'),
+                        ('0', '女'),
+                    ))
+                    age = models.PositiveIntegerField('年龄')     # 只能为正整数
+                    username = models.CharField('登录名', max_length=64, unique=True)      # unique=True, 表示唯一，不能有重复
+                    password = models.CharField('密码', max_length=256)
+                    created_at = models.DateTimeField('创建时间', auto_now_add=True)     # auto_now_add=True, 自动生成创建时间
+                    updated_at = models.DateTimeField('最后更新时间', auto_now=True)         # auto_now=True, 自动生成更新时间
+
+        模型同步migrate：
+            检测模型：
+                python manage.py check
+            模型同步步骤：
+                步骤一：使用 makemigrations 生成同步原语
+                    python manage.py makemigrations
+                步骤二：使用 migrate 执行同步
+                    python manage.py migrate
+                注：
+                    如果同步完模型后，后面要增加一个字段的话，必须将其指定一个默认值
+
+        模型元数据：
+            元数据描述：
+                使用Meta类来进行表示
+                对模型的补充说明
+
+                db_table        模型映射的数据库表名称
+                ordering        指定类型表的默认排序顺序
+                verbose_name    供编程查看的字段名称（便于阅读）
+                abstract        抽象类（抽象类不会生成数据库表）
+                proxy           代理模型（对父模型的功能进行扩充）
+
+                例：
+                    class Meta:     # 内部类
+                        verbose_name = '用户基础信息'
+                        db_table = 'students'
+
+        外键关联类型的对应关系：
+            一对一关系：
+                OneToOneField       表示一对一关系
+                    例：用户基本信息  --  用户详细信息
+            一对多关系：
+                ForeignKey      表示一对多关系
+                    例： 一个用户对应多个收获地址
+            多对多关系:
+                ManyToManyField     表示多对多关系
+                    例：学生选课（n个学生对应n个课程）
+                例：
+                    courses = models.ManyToManyField(另一个表类名称)
+
+        外键关联复合类型：
