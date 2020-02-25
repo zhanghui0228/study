@@ -53,7 +53,7 @@ class UserDatil(models.Model):
 
 class UserAddr(CommonUtil):
     ''' 用户的地址 实现一对多关系 '''
-    useraddrees = models.ForeignKey(Student)    # 外键关联， 一对多关系（一个学生对应多个地址）
+    useraddrees = models.ForeignKey(Student)    # 外键关联， 一对多关系（一个学生对应多个地址） Student为关联的模型
     phone = models.IntegerField('电话', max_length=11)
     address = models.CharField('地址', max_length=256)
     is_valid = models.BooleanField('受否有效', default=True)

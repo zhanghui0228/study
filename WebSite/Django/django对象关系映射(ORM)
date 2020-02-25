@@ -129,3 +129,8 @@ ORM特性：
                     courses = models.ManyToManyField(另一个表类名称)
 
         外键关联复合类型：
+            复合类型：
+                ContentType         模型类型
+                ForeignKey(ContentType)     关联复合模型
+                GenericForeignKey       关联模型
+                GenericRelation         反向关联
