@@ -137,3 +137,10 @@ ORM特性：
 
 2、ORM模型的增删改查：
     2.1、分析定义模型
+        微博用户  1-to-many  发布微博
+        微博内容  1-to-many   微博图片
+        微博     many-to-many  评论
+        评论     many-to-many  用户
+        关注用户     many-to-many  被关注用户
+
+    2.2、使用ORM实现新增操作
