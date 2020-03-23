@@ -8,6 +8,7 @@ class WeiboUser(models.Model):
     username = models.CharField('用户名', max_length=32)
     password = models.CharField('密码', max_length=256)
     nickname = models.CharField('昵称', max_length=32)
+    create_time = models.DateTimeField('创建时间', auto_now_add=True, null=True)
 
     class Meta:
         db_table = 'weibo_user'

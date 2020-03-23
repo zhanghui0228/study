@@ -155,4 +155,10 @@ ORM特性：
             user_obj.save()
 
         使用模型的create()新增数据
-            user_obj = User.object.create(username='admin', password='admin')
+            user_obj = User.objects.create(username='admin', password='admin')
+
+    2.3、使用ORM实现简单的查询操作
+        使用模型的get()查询单条数据
+            user.objects.get(pk=1)
+        使用模型的all()查询所有的数据
+            user.objects.all()
