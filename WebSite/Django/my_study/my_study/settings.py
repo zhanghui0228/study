@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
     'mall.apps.MallConfig',
+    'weibo.apps.WeiboConfig',
 ]
 
 MIDDLEWARE = [
@@ -102,7 +103,7 @@ DATABASES = {
         'NAME': 'students',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': '10.10.10.7',
+        'HOST': '39.106.207.236',
         'PORT': '3306',
     }
 }

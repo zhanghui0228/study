@@ -134,3 +134,6 @@ ORM特性：
                 ForeignKey(ContentType)     关联复合模型
                 GenericForeignKey       关联模型
                 GenericRelation         反向关联
+
+2、ORM模型的增删改查：
+    2.1、分析定义模型
