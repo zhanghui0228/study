@@ -144,3 +144,15 @@ ORM特性：
         关注用户     many-to-many  被关注用户
 
     2.2、使用ORM实现新增操作
+        使用ORM实现CRUD
+            CREATE --新增
+            READ  --读/查询
+            UPDATE --修改
+            DELETE  --删除
+
+        使用模型的save()保存数据
+            user_obj = User(username='admin', password='admin')
+            user_obj.save()
+
+        使用模型的create()新增数据
+            user_obj = User.object.create(username='admin', password='admin')
