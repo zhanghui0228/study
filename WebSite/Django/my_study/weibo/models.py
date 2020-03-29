@@ -5,10 +5,17 @@ from django.db import models
 
 class WeiboUser(models.Model):
     """ 微博用户 """
+    user_status = (
+        (1, "正常"),
+        (2, "限制用户"),
+        (0, "已删除")
+    )
+
     username = models.CharField('用户名', max_length=32)
     password = models.CharField('密码', max_length=256)
     nickname = models.CharField('昵称', max_length=32)
     create_time = models.DateTimeField('创建时间', auto_now_add=True, null=True)
+    status = models.SmallIntegerField('用户状态', choices=user_status, default=1)   # 实现逻辑删除
 
     class Meta:
         db_table = 'weibo_user'

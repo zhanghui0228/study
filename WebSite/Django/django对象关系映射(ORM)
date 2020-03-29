@@ -173,3 +173,15 @@ ORM特性：
 
         使用模型update()批量修改数据
             user_obj = User.objects.all().update(*args, **kwargs)
+
+    2.5 使用ORM实现删除操作
+        使用模型的delete()删除数据
+        删除单条数据
+            user_obj = User.objects.get(pk=1)
+            user_obj.delete()
+        删除多条数据
+            user_obj = User.objects.all()
+            user_obj.delete()
+
+        逻辑删除：   将数据标记为删除， 删除后还在占用磁盘空间， 删除后可以进行恢复， 删除后通过条件不展示给用户
+        物理删除：   将数据直接从数据库中删除， 删除后不会占用磁盘空间，不能在进行恢复
