@@ -98,6 +98,8 @@ ORM特性：
                     python manage.py migrate
                 注：
                     如果同步完模型后，后面要增加一个字段的话，必须将其指定一个默认值
+                            default='默认值'
+                            null=True
 
         模型元数据：
             元数据描述：
@@ -162,3 +164,12 @@ ORM特性：
             user.objects.get(pk=1)
         使用模型的all()查询所有的数据
             user.objects.all()
+
+    2.4、使用ORM实现修改操作
+        使用模型save()修改单条数据
+            user_obj = user.objects.get(username='admin')
+            user_obj.age = 20
+            user_obj.save()
+
+        使用模型update()批量修改数据
+            user_obj = User.objects.all().update(*args, **kwargs)
