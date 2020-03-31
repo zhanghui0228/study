@@ -185,3 +185,30 @@ ORM特性：
 
         逻辑删除：   将数据标记为删除， 删除后还在占用磁盘空间， 删除后可以进行恢复， 删除后通过条件不展示给用户
         物理删除：   将数据直接从数据库中删除， 删除后不会占用磁盘空间，不能在进行恢复
+
+3、查询条件的使用
+        QuerySet 表示从数据库中取出来的对象的集合   QuerySet 结果集
+        它可以含有0个、一个或者多个过滤器（filter）
+        从模型的manager那里取得QuerySet
+        QuerySet的筛选结果本身还是QuerySet
+        QuerySet是惰性的
+    3.1 结果集QuerySet常用方法
+        get()   返回单条记录
+        create()    创建/新增一条数据库记录
+        get_or_create()     有则返回，没有则创建记录
+            user_obj = User.objects.get_to_create(username='zhangsan', password='123123')
+        bulk_create()       创建/新增多条数据库记录
+            user1 = User(username='user1', password='123123')
+            user_object = User.objects.bulk_create([user1,...,user5])
+        first/last()       返回第一条/最后一条记录
+            user_first = user.objects.first()   # 返回第一条数据
+            user_last = user.objects.last()     # 返回最后一条数据
+        count()         返回记录的行数之和
+            user_count = User.objects.all().count()
+        exists()        结果集是否存在（是否存在1条记录以上的记录）
+            User.objects.filter(username='zhangsan').exists()
+        update()    修改记录
+        delete()    物理删除记录
+
+    3.2 QuerySet链式查询方法
+        filter（）     筛选出满足条件的多条记录
