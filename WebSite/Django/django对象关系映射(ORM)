@@ -212,3 +212,13 @@ ORM特性：
 
     3.2 QuerySet链式查询方法
         filter（）     筛选出满足条件的多条记录
+            User.objects.filter(age='20')   # 列出年龄为20岁的
+            User.objects.filter(age='20').count()   # 统计筛选出年龄为20的数量
+        exclude()       排除满足条件的多条记录
+            User.objects.all().exclude(username='zhangsan)      # 列出除usernae为zhangsan的所有信息
+        order_by        对查询的记录进行排序
+            User.objects.all().order_by('-id')      # 对id列进行倒叙
+        all()       查询所有的记录
+        none()      创建一个空的结果集
+        using()     使用指定的数据库查询（多数据库支持）
+
