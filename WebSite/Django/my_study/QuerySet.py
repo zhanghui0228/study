@@ -35,3 +35,10 @@ print(user_count)
 use = user.objects.filter(username='zhangsan').exists()
 use1 = user.objects.filter(username='lisi').exists()
 print(use, use1)
+print("------------------------------------------")
+
+# 对QuerySet进行分片实现分页
+limit = user.objects.all()
+page = limit[1:5]
+for i in page:
+    print(i.username, i.nickname)

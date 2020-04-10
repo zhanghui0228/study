@@ -29,6 +29,9 @@ handler404 = 'my_study.views.page_404'
 
 # 定义视图url
 urlpatterns = [
+    # 微博模块，实现分页
+    url(r'^weibo/', include('weibo.urls', namespace='weibo')),
+
     url(r'^admin/', admin.site.urls),
     url(r'^index/$', views.index),
     url(r'^active/(?P<year>[0-9]{4})/$', views.active, name='active_date'),

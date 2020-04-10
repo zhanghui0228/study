@@ -222,3 +222,56 @@ ORM特性：
         none()      创建一个空的结果集
         using()     使用指定的数据库查询（多数据库支持）
 
+    3.3 分页处理
+        减少等待时间，提升用户体验
+        分页查询：
+            方式一：
+               对查询结果集QuerySet进行分片
+               返回前n个对象（limit 5）
+                User.objects.all()[:5]
+               返回第6个到第10个对象（offset 5 limit 5）
+                User.objects.all()[5:10]
+            方式二：
+                使用django.core.paginator进行分页处理
+
+    3.4 分页处理相关类
+        django.core.
+        paginator   ----分页器
+        page        ----某一页对象
+        异常：
+            InvalidPage     ----无效的页码
+            PageNotAnlnteger    ----页码必须是正整数
+            EmptyPage       ----空页（没有数据）
+        进行分页处理:
+            步骤一：取得分页器Paginator(objects, page_size)
+                objects ----要进行分页的数据
+                page_size   ----每页的数据多少
+                示例：p = Paginator(objects, 2)
+                      p对象属性：
+                       count    ----数据记录的总条数
+                       num_pages    ----总页数（总记录条数/每页大小）
+                       page_range   ----页码范围
+            步骤二：取得页面实例 page = p.page(page_num)
+                page_num ----当前页的页码，如第几页
+                p = Paginator(objects, 2)   # 获取分页器对象
+                page = p.page(3)    # 获取第三页
+
+                页面实例的属性：
+                    number  ----当前页的页码
+                    object_list ----当前页的数据列表
+                    paginator   ----分页器对象的引用
+                页码实例的常用方法：
+                    has_next()  --是否还有下一页
+                    has_previous()  --是否还有上一页
+                    has_other_pages()   --是否还有其它页（上/下一页）
+                    next_page_number()  --下一页的页码，如果没有，触发InvalidPage异常
+
+                模型打印：
+                    class WeiboUser(models.Model):
+                        """微博用户"""
+                            ...
+                        def __str__(self):
+                        '''实现模型的打印，输出详细内容'''
+                            return 'User:{0},Nickname:{1}'.format(self.username, self.nickname)
+
+

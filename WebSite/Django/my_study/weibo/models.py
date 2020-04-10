@@ -20,6 +20,10 @@ class WeiboUser(models.Model):
     class Meta:
         db_table = 'weibo_user'
 
+    def __str__(self):
+        '''实现模型的打印，输出详细内容'''
+        return 'id:{0}, User:{1}, Nickname:{2}, password:{3}'.format(self.id, self.username, self.nickname, self.password)
+
 
 class WeiBo(models.Model):
     """ 微博 """
