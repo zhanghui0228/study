@@ -274,4 +274,32 @@ ORM特性：
                         '''实现模型的打印，输出详细内容'''
                             return 'User:{0},Nickname:{1}'.format(self.username, self.nickname)
 
+    3.5 查询条件的使用
+        查询语法：
+            字段名称__查询条件="查询内容"(注意是双下划线)
+                如：id__exact=6    查询id为6的
+        查询条件：
+            exact       ----等于**值（默认的形式）
+            如: id__exact=6 或者 id=6
+
+            iexact      ----像**值
+            如：name__iexact='zhangsan'
+
+            是否包含**字符串：
+                contains    ----包含**值，区分大小写
+                如： name__contains='san'
+                icontains   ----包含**值，不区分大小写
+                如： name_icontains='san'
+            以**开始：
+                startswith      ----以**开始，区分大小写
+                istartswith     ----以**开始，不区分大小写
+                如： name__startswith='张'
+
+            以**结束：
+                endswith        ----以**结束，区分大小写
+                iendswith       ----以**结束，不区分大小写
+
+            在**选项（列表）之类
+                in
+
 

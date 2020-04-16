@@ -27,7 +27,7 @@ SECRET_KEY = '41+%3ja+5mm6$0ryr)^=)efa$97vln=$olmt&k%3+*schqa60z'
     生产环境改为 False
     开发环境改为 True
 '''
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*',]
 
