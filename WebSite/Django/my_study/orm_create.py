@@ -12,5 +12,5 @@ from weibo.models import WeiboUser as user
 # print(user_A.id)
 
 # 方法二：使用模型的create()进行新增数据
-user_B = user.objects.create(username='user05', password='admin@123', nickname='user02')
+user_B = user.objects.create(username='user08', password='admin@123', nickname='user08', status=0)
 print(user_B.pk)

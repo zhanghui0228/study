@@ -16,13 +16,20 @@ class WeiboUser(models.Model):
     nickname = models.CharField('昵称', max_length=32)
     create_time = models.DateTimeField('创建时间', auto_now_add=True, null=True)
     status = models.SmallIntegerField('用户状态', choices=user_status, default=1)   # 实现逻辑删除
+    creaete_time = models.DateTimeField('创建时间', auto_now_add=True, null=True, blank=True)   # blank 为空  null为空值
 
     class Meta:
         db_table = 'weibo_user'
 
     def __str__(self):
         '''实现模型的打印，输出详细内容'''
-        return 'id:{0}, User:{1}, Nickname:{2}, password:{3}'.format(self.id, self.username, self.nickname, self.password)
+        return 'id:{0}, User:{1}, Nickname:{2}, password:{3}, status:{4}'.format(
+            self.id,
+            self.username,
+            self.nickname,
+            self.password,
+            self.status
+        )
 
 
 class WeiBo(models.Model):

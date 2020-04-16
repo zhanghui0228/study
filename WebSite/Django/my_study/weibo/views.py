@@ -38,13 +38,22 @@ def search(request):
     # # 用户名称包含（不区分大小写）
     # user = User.objects.filter(username__icontains='u')     # icontains 包含**字符，不区分大小写
     # print(user)
-    # 查询z开头用户
-    zero_list = User.objects.filter(nickname__startswith='z')   # startswith    以**开头
-    print(zero_list)
-    # 查询以1结尾的用户
-    end_list = User.objects.filter(nickname__endswith='1')      # endswith      以**结尾
-    print(end_list)
-    # 查询在**选项（列表）   --in的使用
-    in_list = User.objects.filter(status__in=('2'))   # in    查询在**选项（列表）之内的
-    print(in_list)
+    # # 查询z开头用户
+    # zero_list = User.objects.filter(nickname__startswith='z')   # startswith    以**开头
+    # print(zero_list)
+    # # 查询以1结尾的用户
+    # end_list = User.objects.filter(nickname__endswith='1')      # endswith      以**结尾
+    # print(end_list)
+    # # 查询在**选项（列表）   --in的使用
+    # in_list = User.objects.filter(status__in=('2'))   # in    查询在**选项（列表）之内的
+    # print(in_list)
+    # 查询用户状态大于0的结果
+    # user_list = User.objects.filter(status__gt=0)   # gt 大于/gte大于等于
+    # print(user_list)
+    # 查询是否为空值 isnull
+    user_list = User.objects.filter(creaete_time__isnull=True)  # 为空值 NULL
+    print(user_list.count())
+    # 查询是空字符串
+    str_list = User.objects.filter(nickname__exact='')    # 为空字符串
+    print(str_list.count())
     return HttpResponse('ok')
