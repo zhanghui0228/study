@@ -311,4 +311,27 @@ ORM特性：
         isnull  ----是否为空
             如：create_time__isnull=True    # 为空值
 
+    3.7 时间戳的查询使用 ----date/datetime查询条件
+        date    ----日期
+        year    ----年
+        month   ----月份
+        day     ----天
+        hour/minute/second  ----时分秒
+        week/week_day   ----星期
+        注：根据时间查询时注意settings中的时区设置，可将USE_TZ 修改为False，否则有时差的话会查询不出来
 
+        外键关联查询：
+            外键关联数据创建：
+                user1 = WeiboUser.objects.get(username='user1')
+                user1_weibo = WeiBo.objects.create(user=user1, context='my is user1')
+                user1_comment = Comment.objects.create(user=user1, context='user1 is comment', weibo=user1_weibo)
+
+            外键关联数据查询：
+                user = User.objects.get(username='zhangsan')
+                weibo_list = WeiBo.objects.filter(user=user)
+                for item in weibo_list:
+                    print(item.context)
+                或者：
+                weib_list = WeiBo.objects.filter(user__username='user1)
+                for item in weibo_list:
+                    print(item.context)
