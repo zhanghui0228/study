@@ -9,5 +9,9 @@ urlpatterns = [
     url(r'^search/$', views.search, name='search'),
     # 事务练习
     url(r'^trans/$', views.trans, name='trans'),
+    # 使用with进行事务练习
+    url(r'^trans_with/$', views.trans_with, name='trans_with'),
+    # 手动控制事务
+    url(r'^trans_hand/$', views.trans_hand, name='trans_hand'),
 
 ]

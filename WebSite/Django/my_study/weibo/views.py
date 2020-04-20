@@ -108,5 +108,39 @@ def trans(request):
     weibo = WeiBo.objects.create(user=user, context='trans test 1')
     # 发布评论
     comment = Comment.objects.create(user=user, context='trans comment 1', weibo=weibo)
+    return HttpResponse('ok')
 
+
+# 使用with使用事务，只准用户提交成功
+def trans_with(requests):
+    """
+    事务练习
+    用户发布微博的时候，顺便发布一条评论，只能同时成功，不能失败
+    使用with进行实现
+    """
+    with transaction.atomic():
+        user = User.objects.get(username='zhangsan')
+        # 发布微博
+        weibo = WeiBo.objects.create(user=user, context='trans test with')
+        # 发布评论
+        comment = Comment.objects.create(user=user, context='trans comment with', weibo=weibo)
+    return HttpResponse('ok')
+
+
+# 手动控制事务
+def trans_hand(requests):
+    """
+    手动控制事务
+    用户发布微博的时候，顺便发布一条评论，只能同时成功，不能失败
+    """
+    try:
+        user = User.objects.get(username='user1')
+        # 发布微博
+        weibo = WeiBo.objects.create(user=user, context='trans test hand')
+        # 发布评论
+        comment = Comment.objects.create(user=user, context='trans comment hand', weibo=weibo)
+    except:
+        # 不使用事务， 失败则手动删除数据
+        weibo.delete()
+        comment.delete()
     return HttpResponse('ok')

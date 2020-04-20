@@ -349,7 +349,7 @@ ORM特性：
 
     4.1 在django中使用事务
         from django.db import transaction
-        @transaction.atomic
+        @transaction.atomic()
         def viewfunc(request):
             # 事务内代码
             do_stuff()
@@ -367,3 +367,11 @@ ORM特性：
                 transaction.commit()    # 提交事务
             except:
                 transaction.rollback()  # 回滚
+
+    4.2 django中使用事务进行手动提交和回滚
+        使用with进行事务的提交（只准用户提交成功）
+        语法：
+         with transaction.atomic():
+            # 事务内代码
+            do_stuff()
+
