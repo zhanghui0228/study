@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db import transaction
 from django.shortcuts import render
 from django.http import HttpResponse
 from weibo.models import WeiboUser as User, Comment, WeiBo
@@ -93,4 +94,19 @@ def search(request):
     user1_weibo = WeiBo.objects.filter(user__username='user1')
     for item in user1_weibo:
         print(item.context)
+    return HttpResponse('ok')
+
+# 事务练习
+@transaction.atomic()    # 引用事务
+def trans(request):
+    """
+    事务练习
+    用户发布微博的时候，顺便发布一条评论，只能同时成功，不能失败
+    """
+    user = User.objects.get(username='zhangsan')
+    # 发布微博
+    weibo = WeiBo.objects.create(user=user, context='trans test 1')
+    # 发布评论
+    comment = Comment.objects.create(user=user, context='trans comment 1', weibo=weibo)
+
     return HttpResponse('ok')

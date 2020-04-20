@@ -7,5 +7,7 @@ urlpatterns = [
     url('^user/(?P<page>\d+)/$', views.page_user, name='page_user'),
     # ORM查询练习
     url(r'^search/$', views.search, name='search'),
+    # 事务练习
+    url(r'^trans/$', views.trans, name='trans'),
 
 ]

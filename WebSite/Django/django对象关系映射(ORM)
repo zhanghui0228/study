@@ -335,3 +335,35 @@ ORM特性：
                 weib_list = WeiBo.objects.filter(user__username='user1)
                 for item in weibo_list:
                     print(item.context)
+
+4、事务的使用
+    什么时事务？
+        多个数据库逻辑操作的集合
+    事务特性：
+        事务的原子性要求事务要么全部完成，要么全部不完成，不可能停滞在某个中间状态
+    回滚：
+        多个逻辑中某个操作出错，回到初始状态
+    在什么情况下需要使用事务控制
+        对多个ORM模型操作时
+        对结果要求严格一致（要么成功，要么失败）
+
+    4.1 在django中使用事务
+        from django.db import transaction
+        @transaction.atomic
+        def viewfunc(request):
+            # 事务内代码
+            do_stuff()
+        事务自动提交过程：
+        atomic自动提交过程解析
+            进入到最外层的atomic代码块时会打开一个事务
+            进入到内部atomic代码块时会创建一个标记
+            退出内部代码块时会释放或者回滚至标记
+            退出外部块时提交或者回退事务
+        手动提交和回滚：
+            from django.db import transaction
+            try:
+                a.save()
+                b.save()
+                transaction.commit()    # 提交事务
+            except:
+                transaction.rollback()  # 回滚
