@@ -31,6 +31,8 @@ handler404 = 'my_study.views.page_404'
 urlpatterns = [
     # 微博模块，实现分页
     url(r'^weibo/', include('weibo.urls', namespace='weibo')),
+    # 学生程间模块, 进行聚合与统计
+    url(r'^student/', include('student.urls', namespace='student')),
 
     url(r'^admin/', admin.site.urls),
     url(r'^index/$', views.index),

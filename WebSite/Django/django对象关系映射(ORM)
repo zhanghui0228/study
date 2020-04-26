@@ -349,7 +349,7 @@ ORM特性：
 
     4.1 在django中使用事务
         from django.db import transaction
-        @transaction.atomic()
+        @transaction.atomic()       # 使用装饰器进行事务控制
         def viewfunc(request):
             # 事务内代码
             do_stuff()
@@ -374,4 +374,37 @@ ORM特性：
          with transaction.atomic():
             # 事务内代码
             do_stuff()
+
+        手动提交和回滚
+        try:
+            transaction.set_autocommit(False)       # 放弃自动提交
+            # 事务代码
+            do_stuff()
+            transaction.commit()    # 手动提交事务
+        except:
+            transaction.rollback()  # 手动控制事务，实现回滚
+
+    4.3 django中聚合与统计的使用
+        内置聚合函数
+            聚合函数位于 django.db.models
+            sum --求和
+            avg --求平均数
+            count   --计数
+            max/min --最大值/最小值
+
+        聚合的两种方式
+            1)使用aggregate从整个查询结果集生成统计数据
+            示例：
+                from django.db.models import Avg
+                B = Book.objects.all().aggregate(Avg('price'))
+                {'price_avg': 34.35}
+                B['prive_avg']  # 获取具体数据
+            2)使用annotate为查询结果集中的每一项生成统计数据
+            示例：
+                from django.db.models import Count
+                q = Book.objects.all().annotate(Count('authors'))   # 有外键关联时使用
+                q = Book.objects.values_list('可以进行分组的列').annotate(Count('authors'))   # 没有外键关联时，一张表中进行分组
+                q[0]
+                <Book: The Definitive Guide to Django>
+                q[0].authors__count
 

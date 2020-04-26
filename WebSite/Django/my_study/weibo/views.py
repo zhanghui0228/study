@@ -134,13 +134,19 @@ def trans_hand(requests):
     用户发布微博的时候，顺便发布一条评论，只能同时成功，不能失败
     """
     try:
+        # 放弃自动提交
+        transaction.set_autocommit(False)
         user = User.objects.get(username='user1')
         # 发布微博
         weibo = WeiBo.objects.create(user=user, context='trans test hand')
         # 发布评论
         comment = Comment.objects.create(user=user, context='trans comment hand', weibo=weibo)
+        # 手动提交事务
+        transaction.commit()
     except:
         # 不使用事务， 失败则手动删除数据
-        weibo.delete()
-        comment.delete()
+        # weibo.delete()
+        # comment.delete()
+        # 手动控制事务，实现回滚
+        transaction.rollback()
     return HttpResponse('ok')

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'mall.apps.MallConfig',
     'weibo.apps.WeiboConfig',
+    'student',
 ]
 
 MIDDLEWARE = [
