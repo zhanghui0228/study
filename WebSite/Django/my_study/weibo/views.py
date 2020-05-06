@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db import transaction
+from django.db.models import Q
 from django.shortcuts import render
 from django.http import HttpResponse
 from weibo.models import WeiboUser as User, Comment, WeiBo
@@ -112,7 +113,7 @@ def trans(request):
 
 
 # 使用with使用事务，只准用户提交成功
-def trans_with(requests):
+def trans_with(request):
     """
     事务练习
     用户发布微博的时候，顺便发布一条评论，只能同时成功，不能失败
@@ -128,7 +129,7 @@ def trans_with(requests):
 
 
 # 手动控制事务
-def trans_hand(requests):
+def trans_hand(request):
     """
     手动控制事务
     用户发布微博的时候，顺便发布一条评论，只能同时成功，不能失败
@@ -150,3 +151,35 @@ def trans_hand(requests):
         # 手动控制事务，实现回滚
         transaction.rollback()
     return HttpResponse('ok')
+
+
+# Q()函数查询使用
+def page_q(request):
+    """
+    Q()函数的查询使用
+    """
+    # # or |
+    # # URL中获取查询参数
+    # name = request.GET.get('name', None)    # 前台访问地址，http://127.0.0.1:9000/weibo/q/?name=user2 传入参数
+    # query = Q(username=name) | Q(nickname=name)
+    # # 查询username或者nickname都为user2的用户
+    # # query = Q(username='user2') | Q(nickname='user2')
+    # user_list = User.objects.filter(query)
+    # print(user_list)
+
+    # and &
+    # 查询用户名是xxx，而且昵称是xxx的用户
+    # username 按用户名称查询
+    username = request.GET.get('username', None)
+    if username is not None:
+        query = Q(username=username)
+    # nickname 按用户昵称查询
+    nickname = request.GET.get('nickname', None)
+    if nickname is not None:
+        query = query & Q(nickname=nickname)
+    user_list_q2 = User.objects.filter(query)
+    print(user_list_q2)
+    for item in user_list_q2:
+        print(item.username)
+
+    return HttpResponse("ok")

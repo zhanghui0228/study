@@ -13,5 +13,7 @@ urlpatterns = [
     url(r'^trans_with/$', views.trans_with, name='trans_with'),
     # 手动控制事务
     url(r'^trans_hand/$', views.trans_hand, name='trans_hand'),
+    # Q()函数查询使用
+    url(r'^q/$', views.page_q, name='page_q'),
 
 ]
