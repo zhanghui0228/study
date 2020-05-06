@@ -410,6 +410,10 @@ ORM特性：
 
 
 5、自定义查询
-    使用Q()函数实现复杂的查询
-    Q()函数支持 &（且）和|（或），对应sql中的AND和OR
+    5.1 使用Q()函数实现复杂的查询
+        Q()函数支持 &（且）和|（或），对应sql中的AND和OR
+        from django.db.models import Q
+        query = Q(username='zhangsan')
+        user_list = User.objects.filter(query)
+
 
