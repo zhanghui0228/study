@@ -417,3 +417,12 @@ ORM特性：
         user_list = User.objects.filter(query)
 
 
+    5.2 F()函数的使用
+        F()函数从数据库操作层面修改数据
+        F()函数可避免同时操作时竟态条件
+        语法：
+            import django.db.models.F(Combinable)
+            user = WeiboUser.objects.get(pk=2)
+            user.status = F('status') + 1
+            user.save()
+
