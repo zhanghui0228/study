@@ -15,5 +15,8 @@ urlpatterns = [
     url(r'^trans_hand/$', views.trans_hand, name='trans_hand'),
     # Q()函数查询使用
     url(r'^q/$', views.page_q, name='page_q'),
-
+    # raw(sql)函数使用
+    url(r'^raw/$', views.page_raw, name='page_raw'),
+    # 使用sql查询
+    url(r'^sql/$', views.page_sql, name='page_sql'),
 ]

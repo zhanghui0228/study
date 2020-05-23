@@ -426,3 +426,23 @@ ORM特性：
             user.status = F('status') + 1
             user.save()
 
+    5.3 使用管理器raw(sql)查询
+        使用SQL查询的方式：
+            方式一：使用管理器的raw(sql)函数
+                raw(raw_query, params=None, translations=None)
+                    raw_query：表示sql语句
+                    params：sql语句中的参数变量
+                返回Django.db.models.query.RawQuerySet实例
+                示例：
+                        sql = 'select id,username from weibo_user'
+                        user_list = User.objects.raw(sql)
+            方式二：获取数据库连接、游标，直接执行sql
+                1、获取数据库连接
+                    from django.db import connection
+                2、从连接得到游标
+                    cursor = connection.cursor()
+                3、执行sql
+                    cursor.execute("select * from table where baz=%s".[baz])
+                4、查询结果
+                    row = cursor.fetchone()
+

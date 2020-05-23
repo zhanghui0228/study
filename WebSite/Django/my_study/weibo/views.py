@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.db import transaction
+from django.db import transaction, connection
 from django.db.models import Q
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -183,3 +183,32 @@ def page_q(request):
         print(item.username)
 
     return HttpResponse("ok")
+
+
+# raw(sql)函数使用
+def page_raw(request):
+    """ raw(sql)函数的使用 """
+    username = request.GET.get('username', '')
+    sql = 'select id,username from weibo_user where username=%s'
+    user_list = User.objects.raw(sql, [username])
+    for item in user_list:
+        print(item)
+    # url 访问地址：http://127.0.0.1:8000/weibo/raw/?username=user1
+    return HttpResponse('ok')
+
+
+# 使用sql查询
+def page_sql(request):
+    """ 使用sql查询 """
+    sql = 'select id,username from weibo_user where username=%s'
+    # 获取数据库连接
+
+    # 根据连接获取游标
+    cursor = connection.cursor()
+    # 根据游标执行sql
+    result = cursor.execute(sql, ['user3'])
+    # 获取查询结果
+    rows = cursor.fetchall()
+    for row in rows:
+        print(row)
+    return HttpResponse('ok')
