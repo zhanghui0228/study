@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.db import transaction, connection
+from django.db import transaction
 from django.db.models import Q
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -202,7 +202,7 @@ def page_sql(request):
     """ 使用sql查询 """
     sql = 'select id,username from weibo_user where username=%s'
     # 获取数据库连接
-
+    from django.db import connection
     # 根据连接获取游标
     cursor = connection.cursor()
     # 根据游标执行sql
@@ -211,4 +211,50 @@ def page_sql(request):
     rows = cursor.fetchall()
     for row in rows:
         print(row)
+    return HttpResponse('ok')
+
+
+# 自定义sql实现分页器
+def customize_sql(request):
+    """ 自定义sql实现分页处理 """
+    # page = 1    # 表示页码，当前页
+    try:
+        page = int(request.GET.get('page', 1))
+    except:
+        return HttpResponse('no vaild page')
+    page_size = 5   # 表示每页的数据大小
+    offset = (page - 1) * page_size
+    # 准备sql
+    sql = 'select id,username from weibo_user limit %s offset %s'
+    # 获取数据库连接
+    from django.db import connection
+    # 根据连接获取游标
+    cursor = connection.cursor()
+    # 根据游标执行sql
+    result = cursor.execute(sql, [page_size, offset])
+    # 获取查询结果
+    rows = cursor.fetchall()
+    for row in rows:
+        print(row)
+
+    return HttpResponse("ok")
+
+
+# 自定义封装分页器类
+def page_sqlpaginator(request):
+    """ 自定义封装分页器类 """
+    from utils.sqlPage import SqlPaginator
+    try:
+        # 访问URL：http://127.0.0.1:8000/weibo/sqlpaginator/?page=2
+        page = int(request.GET.get('page', 1))
+    except:
+        return HttpResponse('no vaild page')
+    sql = 'SELECT id,username,nickname FROM weibo_user'
+    sql_params = []
+    page_size = 4
+    paginator = SqlPaginator(sql, sql_params, page_size)
+    page_data = paginator.page(page)
+    for row in page_data:
+        print(row)
+
     return HttpResponse('ok')

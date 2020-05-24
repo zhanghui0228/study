@@ -446,3 +446,15 @@ ORM特性：
                 4、查询结果
                     row = cursor.fetchone()
 
+    5.4 自定义sql分页
+        第一步：为sql添加limit 及 offset 分页处理
+            page = 1    # 表示页码，当前页
+            page_size = 5   # 表示每页的数据大小
+            offset = (page - 1) * page_size
+            # 准备sql
+            sql = 'select id,username from weibo_user limit %s offset %s'
+        第二步：根据页面参数page生成偏移量
+            page = request.GET.get('page', 1)
+        第三步：封装分页类
+        第四步：返回记录总数
+        第五步：返回总页数

@@ -19,4 +19,8 @@ urlpatterns = [
     url(r'^raw/$', views.page_raw, name='page_raw'),
     # 使用sql查询
     url(r'^sql/$', views.page_sql, name='page_sql'),
+    # 自定义sql实现分页
+    url(r'^page_sql/$', views.customize_sql, name='customize_sql'),
+    # 自定义封装分页器类
+    url(r'^sqlpaginator/$', views.page_sqlpaginator, name='sqlpaginator'),
 ]
